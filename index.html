@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+  <style>
+    
+	
+	  
+  
+	
+	  
+	  
+	  
+   button {
+    background-color: #f68a1f;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 4px;
+    cursor: pointer;
+	  border-radius: 4px;
+	  -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+	  font-family: "Myriad pro","Trebuchet MS","Lucida Grande","Lucida Sans Unicode","Lucida Sans",sans-serif;
+  }
+  button:hover {
+    background-color: #da7009;
+    color: white;	
+  } 
+    
+    
+    
+  </style>
+ 
+ 
+ 
+  
+    
+    <head>
+
+        <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+	<script src="https://lpcdn.lpsnmedia.net/webagent/client-SDK.min.js"></script>
+    
+    </head>
+    <body>
+      
+      
+     
+      
+      
+        <form id="foo" name="foo" > <!-- style="display:block" -->
+               
+                <br>
+  
+                <label for="yesno">TOBi ha compreso la richiesta?</label><br>
+                <input type="radio" name="yesno" value="Yes" /> Yes<br/>
+		<input type="radio" name="yesno" value="No" /> No 
+          
+                <br>
+                <br>
+                
+                <textarea id = "comments" name="comments" rows="10" cols="30">Lascia un tuo commento:</textarea>
+                <br>
+                <br>
+               
+                <button id = "mybutton" type="button" onclick="sendData()">Invio Feedback</button>
+                <div id="alert"></div>
+                <br>
+                <br>
+                
+            </form>
+    <script>
+      
+	function sendData() {
+		document.getElementById("alert").innerHTML = "...invio dati...";
+            	document.getElementById("alert").style = "color : red";
+		var yesno = $('input[name=yesno]:checked').val();
+		var comments = $("#comments").val();
+		console.log("***" + yesno + "***" + comments + "***");
+        	var xhr = new XMLHttpRequest();
+        	xhr.addEventListener("readystatechange", function () {
+          		if (this.readyState === 4) {
+				// var jsonResult = JSON.parse(this.responseText);
+            			document.getElementById("alert").innerHTML = "fatto!";
+            			document.getElementById("alert").style = "color : green";
+          		}
+        	});
+        	var URLforGET = "https://paddypowerbot.herokuapp.com/add?yesno=" + yesno + "&comments=" + comments + "&convID=" + convID + "&skill=" + skill;
+		console.log(URLforGET);
+		xhr.open("GET", URLforGET);
+        	xhr.send();
+	}
+	
+	var convID = "";
+	var skill = "";
+	    
+	$(document).ready(function() {
+              
+              	var SDK=lpTag.agentSDK;
+              	SDK.init();
+                
+                var onSuccess1 = function(data) {
+                // Do something with the returning data
+                	convID = data;
+                };
+                
+                var onError1 = function(data) {
+                // Do something with the returning data
+                	convID = null;
+                };
+                
+                
+                var onSuccess2 = function(data) {
+                // Do something with the returning data
+                	skill = data;
+                };
+                
+                
+                var onError2 = function(data) {
+                // Do something with the returning data
+                	skill = null;
+                };
+                
+               
+   
+               
+             
+                SDK.get('chatInfo.rtSessionId', onSuccess1, onError1);
+                SDK.get('engagementInfo.skill', onSuccess2, onError2);
+               
+              
+           });
+	    
+	    
+	    
+      
+    </script>
+  
+        
+          
+      
+    </body>
+</html>
