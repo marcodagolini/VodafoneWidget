@@ -64,6 +64,12 @@
                 <textarea id = "comments" name="comments" rows="10" cols="30">Lascia un tuo commento:</textarea>
                 <br>
                 <br>
+		
+                <label for="minutes">Risveglia la conversazione tra </label>
+                <input id = "minutes" name="minutes">
+		<label for="minutes"> minuti. (funzione disabilitata)</label>
+                <br>
+                <br>		
                
                 <button id = "mybutton" type="button" onclick="sendData()">Invio Feedback</button>
                 <div id="alert"></div>
@@ -78,6 +84,13 @@
             	document.getElementById("alert").style = "color : red";
 		var yesno = $('input[name=yesno]:checked').val();
 		var comments = $("#comments").val();
+		var minutes = $("#minutes").val();
+		if (!isNaN(parseFloat(minutes))){
+			minutes = Math.round(parseFloat(minutes));
+		}
+		else{
+			minutes = "";
+		}
 		console.log("***" + yesno + "***" + comments + "***");
         	var xhr = new XMLHttpRequest();
         	xhr.addEventListener("readystatechange", function () {
@@ -87,7 +100,7 @@
             			document.getElementById("alert").style = "color : green";
           		}
         	});
-        	var URLforGET = "https://vodafonebotdario.herokuapp.com/add?yesno=" + yesno + "&comments=" + comments + "&convID=" + convID + "&skill=" + skill;
+        	var URLforGET = "https://vodafonebotdario.herokuapp.com/add?yesno=" + yesno + "&comments=" + comments + "&convID=" + convID + "&skill=" + skill + "&minutes=" + minutes;
 		console.log(URLforGET);
 		xhr.open("GET", URLforGET);
         	xhr.send();
