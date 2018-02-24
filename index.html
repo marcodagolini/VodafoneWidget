@@ -83,6 +83,9 @@
 		document.getElementById("alert").innerHTML = "...invio dati...";
             	document.getElementById("alert").style = "color : red";
 		var yesno = $('input[name=yesno]:checked').val();
+		if (yesno === "undefined"){
+			yesno = "---";
+		}
 		var comments = $("#comments").val();
 		var minutes = $("#minutes").val();
 		if (!isNaN(parseFloat(minutes))){
