@@ -61,24 +61,21 @@
 		<input type="radio" name="yesno" value="No" /> No 
           
                 <br>
-                <br>
 		<br>
                 <label for="comments">Lascia un tuo commento:</label><br>
                 <textarea id = "comments" name="comments" rows="5" cols="30"></textarea>
                 <br>
                 <br>
-		<br>
 
-		<!--********************************************************************
 		
-                <label for="minutes">Risveglia tra </label>
-                <input id = "minutes" name="minutes" maxlength="4" size="4">
-		<label for="minutes"> minuti.</label>
+                <label for="minutes">Non mettere nel Limbo </label>
+		<input id = "minutes" type="checkbox" name="minutes">
                 <br>
                 <br>
 		<br>
 
-		********************************************************************-->
+
+
 
                
                 <button id = "mybutton" type="button" onclick="sendData()">Invio Feedback</button>
@@ -98,13 +95,7 @@
 		}
 		var comments = $("#comments").val();
 		var minutes = $("#minutes").val();
-		if (!isNaN(parseFloat(minutes))){
-			minutes = Math.round(parseFloat(minutes));
-		}
-		else{
-			minutes = "";
-		}
-		console.log("***" + yesno + "***" + comments + "***");
+		console.log("***" + yesno + "***" + comments + "***" + minutes + "***");
         	var xhr = new XMLHttpRequest();
         	xhr.addEventListener("readystatechange", function () {
           		if (this.readyState === 4) {
