@@ -94,9 +94,15 @@
 			yesno = "---";
 		}
 		var comments = $("#comments").val();
+		if (comments === undefined){
+			comments = "---";
+		}
 		var minutes = "";
 		if ($('#minutes').is(":checked")){
 			minutes = "noLimbo";
+		}
+		else{
+			minutes = "---";
 		}
 		
 		console.log("***" + yesno + "***" + comments + "***" + minutes + "***");
