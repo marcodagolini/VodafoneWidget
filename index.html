@@ -112,7 +112,7 @@
             			document.getElementById("alert").style = "color : green";
           		}
         	});
-        	var URLforGET = "https://vodafonebotdario.herokuapp.com/add?yesno=" + yesno + "&comments=" + comments + "&convID=" + convID + "&skill=" + skill + "&minutes=" + minutes;
+        	var URLforGET = "https://vodafonebotdario.herokuapp.com/add?retrieve=web&yesno=" + yesno + "&comments=" + comments + "&convID=" + convID + "&skill=" + skill + "&minutes=" + minutes;
 		console.log(URLforGET);
 		xhr.open("GET", URLforGET);
         	xhr.send();
